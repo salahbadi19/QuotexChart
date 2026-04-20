@@ -1,18 +1,17 @@
 [project]
-name = "pyquotex"
-version = "1.0.3"
-description = "Quotex API Client written in Python."
+name = "qxchart"
+version = "0.1.0"
+description = "Modern trading UI system with real-time charts, indicators, and editor execution engine."
 authors = [
-    { name = "cleiton", email = "cleiton.leonel@gmail.com"}]
+    { name = "qxzero1", email = "sbabi5625@gmail.com" }
+]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "pyquotex" }]
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.10,<4.0"
 
 dependencies = [
     "websocket-client (>=1.8.0,<2.0.0)",
     "requests (>=2.32.3,<3.0.0)",
-    "pyfiglet (>=1.0.2,<2.0.0)",
     "beautifulsoup4 (>=4.12.3,<5.0.0)",
     "fake-useragent (==2.2.0)",
     "certifi (>=2024.2.2)",
@@ -23,7 +22,6 @@ dependencies = [
 numpy = { version = "^2.2.3", markers = "platform_machine != 'aarch64' and platform_machine != 'armv7l'" }
 
 [tool.poetry.group.dev.dependencies]
-python = ">=3.12,<4.0"
 pytest = "^8.0.0"
 pytest-asyncio = "^0.23.5"
 pytest-mock = "^3.12.0"

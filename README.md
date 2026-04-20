@@ -1,136 +1,124 @@
-# 🚀 PyQuotex
+# 🚀 QuotexChart
 
 ---
+
 <p align="center">
-  <a href="https://github.com/cleitonleonel/pyquotex">
-    <img src="pyquotex.png" alt="pyquotex" width="350" height="auto" title="PyQuotex"/>
-  </a>
-</p>
-<p align="center">
-  <i>Unofficial Quotex Library API Client written in Python!</i>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/python-3.12%20%7C%203.13-green" alt="Python Versions"/>
+  <img src="images/QX.png" alt="QuotexChart Logo" width="260"/>
 </p>
 
----
+<p align="center">
+  <b>Modern trading interface with real-time charts, indicators, and an advanced editor system.</b>
+</p>
 
-## 📘 Sobre o projeto (PT-BR)
-
-O **PyQuotex** nasceu como uma biblioteca open-source para facilitar a comunicação com a plataforma Quotex via WebSockets. Com o tempo e devido ao uso indevido, uma versão privada mais segura e robusta foi criada.
-
----
-
-## 📘 About the Project (EN)
-
-**PyQuotex** started as an open-source library to make it easier to communicate with the Quotex platform using WebSockets. Due to misuse, a more robust private version was later introduced.
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-trading-blue" />
+  <img src="https://img.shields.io/badge/ui-real--time-green" />
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey" />
+</p>
 
 ---
 
-## 🎯 Objetivo da Biblioteca / Library Goal
+## 🚀 Overview
 
-Prover ferramentas para desenvolvedores integrarem seus sistemas com a plataforma Quotex, permitindo operações automatizadas de forma segura e eficiente.
+A lightweight and fast trading UI system inspired by modern trading platforms.
+It provides real-time charts, asset selection, timeframe control, and a built-in indicator editor.
 
-> ⚠️ Esta biblioteca **não é um robô de operações** e não toma decisões por conta própria.
+📢 Join our Telegram channel for updates and ready-to-use indicators:
+👉 https://t.me/qxchart
 
 ---
 
-# 📚 Documentação Completa
-https://cleitonleonel.github.io/pyquotex/
-
-
-## 🛠 Instalação
-
-### 1. Clone o repositório:
+# 🛠️ Installation & Usage
 
 ```bash
-git clone https://github.com/cleitonleonel/pyquotex.git
-cd pyquotex
-poetry install
-poetry run python app.py
-```
+# Clone the repository
+git clone https://github.com/salahbadi19/QuotexChart.git
+cd QuotexChart
 
-### 2. Ou instale diretamente no seu projeto com Poetry:
+# Install requirements
+pip install -r requirements.txt
 
-```bash
-poetry add git+https://github.com/cleitonleonel/pyquotex.git
-```
-
-### 2.1. Instale com um comando no Termux (Android):
-
-```shell
-curl -sSL https://raw.githubusercontent.com/cleitonleonel/pyquotex/refs/heads/master/run_in_termux.sh | sh
-```
-
-
-## 🧪 Exemplo de uso
-
-```python
-from pyquotex.stable_api import Quotex
-
-client = Quotex(
-  email="your_email",
-  password="your_password",
-  lang="pt"  # ou "en"
-)
-
-await client.connect()
-print(await client.get_balance())
-await client.close()
+# Run the application
+python engine.py
 ```
 
 ---
 
-## 💡 Recursos Principais
+# 🧭 Trading Dashboard Preview
 
-| Função                     | Descrição                              |
-| -------------------------- | -------------------------------------- |
-| `connect()`                | Conecta via WebSocket com reconexão    |
-| `get_balance()`            | Retorna o saldo da conta               |
-| `buy()`                    | Realiza uma operação de compra         |
-| `check_win()`              | Verifica o resultado de uma operação   |
-| `get_candles()`            | Retorna candles históricos             |
-| `get_realtime_sentiment()` | Sentimento em tempo real do ativo      |
-| `edit_practice_balance()`  | Recarrega a conta demo                 |
+<p align="center">
+  <img src="images/login.png" width="32%" />
+  <img src="images/chart.png" width="32%" />
+  <img src="images/editor-open.png" width="32%" />
+</p>
 
----
-
-## 🔒 Versão Privada Disponível
-
-Uma versão privada está disponível com recursos adicionais, estabilidade aprimorada e melhor suporte.
-
-👉 [Acesse a versão privada](https://t.me/pyquotex/852) para desbloquear o máximo do PyQuotex!
-
-### 💥 Comparativo de Versões
-
-| Recurso                        | Open Source ✅ | Versão Privada ✨      |
-|--------------------------------| ------------- | --------------------- |
-| Suporte a Multilogin           | ❌             | ✅                     |
-| Monitoramento de Sentimentos   | ✅             | ✅ + detecção avançada |
-| Proxy/DNS Customizado          | ❌             | ✅                     |
-| Robustez e Alta Confiabilidade | ✅             | ✨ Nível enterprise    |
-| Velocidade de Execução         | ✅             | ⚡ Ultra rápido        |
-| Suporte                        | ❌             | ✅                     |
+<p align="center">
+  <i>Login • Chart Engine • Indicator Editor</i>
+</p>
 
 ---
 
-## 🤝 Apoie este projeto
+# 📊 Market Tools
 
-[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cleiton.leonel)
+<p align="center">
+  <img src="images/currencies.png" width="48%" />
+  <img src="images/timeframes.png" width="48%" />
+</p>
 
-### 💸 Criptomoedas
+<p align="center">
+  <i>Asset Selection • Timeframe Control</i>
+</p>
 
-* **Dogecoin (DOGE)**: `DMwSPQMk61hq49ChmTMkgyvUGZbVbWZekJ`
-* **Bitcoin (BTC)**: `bc1qtea29xkpyx9jxtp2kc74m83rwh93vjp7nhpgkm`
-* **Ethereum (ETH)**: `0x20d1AD19277CaFddeE4B8f276ae9f3E761523223`
-* **Solana (SOL)**: `4wbE2FVU9x4gVErVSsWwhcdXQnDBrBVQFvbMqaaykcqo`
+---
+
+# ⚙️ Indicator Engine
+
+<p align="center">
+  <img src="images/indicator-run.png" width="70%" />
+</p>
+
+<p align="center">
+  <i>Run custom indicators directly from the built-in editor</i>
+</p>
 
 ---
 
-## 📞 Contato
+# ⚡ Key Features
 
-* Telegram: [cleitonlc](https://t.me/cleitonlc)
-* GitHub: [cleitonleonel](https://github.com/cleitonleonel)
-* LinkedIn: [Cleiton Leonel](https://www.linkedin.com/in/cleiton-leonel-creton-331138167/)
+- 📈 Real-time candlestick chart engine
+- 💱 Multi-asset trading interface
+- ⏱️ Dynamic timeframe switching
+- 🧑‍💻 Built-in indicator editor
+- ⚙️ Live script execution engine
+- ⚡ Optimized high-performance UI
 
 ---
+
+# 🧠 System Design
+
+- Modular UI component architecture
+- Event-driven updates system
+- Plugin-based indicator engine
+- Optimized rendering pipeline
+- Scalable structure for future expansion
+
+---
+
+# 🤝 Credits
+
+- Core inspiration: 🔗 https://github.com/cleitonleonel/pyquotex
+- Official Repository: 🔗 https://github.com/salahbadi19/QuotexChart
+- Project author: @qxzero1
+
+---
+
+# 📢 Community
+
+Stay updated & get indicators:
+👉 https://t.me/qxchart
+
+---
+
+# 📜 License
+
+MIT License — free to use, modify, and distribute.

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotex Pro Trader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔹 Favicon & App Icons -->
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon.png">
+    <meta name="apple-mobile-web-app-title" content="Quotex Pro Trader">
+    <meta name="theme-color" content="#050814">
+    
+    <script src="/eel.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <base target="_blank">
+</head>
+<body>
+    <!-- 🔹 Toolbar -->
+    <div id="toolbar">
+        <div class="btn" id="assetsBtn">
+            <svg class="ic" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            Assets
+        </div>
+        <div class="btn" id="timeframesBtn">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Timeframes
+        </div>
+        <div class="btn btn-gold" id="indicatorsBtn">
+            <svg class="ic gl" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+            Indicators
+        </div>
+        <div class="btn" id="editorBtn">
+            <svg class="ic gl" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Editor
+        </div>
+        <div id="currentAsset">AUD/CAD (OTC)</div>
+        <div id="currentTimeframe" class="btn active">1m</div>
+        <div class="btn" id="settingsBtn">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+    </div>
+
+    <!-- 🔹 New File Card -->
+    <div id="newFileCard">
+        <div class="nf-header"><span class="nf-title">NEW FILE</span><span class="nf-close" onclick="hideNewFile()">&#10005;</span></div>
+        <div class="nf-body">
+            <div class="nf-field"><label>Name</label><input type="text" id="nfFileName" placeholder="MyIndicator"></div>
+            <div class="nf-field"><label>Template</label><div class="nf-templates" id="nfTemplates"></div></div>
+            <div class="nf-error" id="nfError"></div>
+            <div class="nf-actions">
+                <button class="nf-cancel" onclick="hideNewFile()">Cancel</button>
+                <button class="nf-create" id="nfCreateBtn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔹 Modals -->
+    <div id="assetsModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Select Asset</div>
+                <div class="modal-close" onclick="closeAssetsModal()">&#10005;</div>
+            </div>
+            <div class="modal-search"><input type="text" id="modalAssetSearch" class="modal-search-input" placeholder="Search assets..." autocomplete="off"></div>
+            <div class="modal-content" id="assetsModalContent"></div>
+        </div>
+    </div>
+    <div id="timeframesModal" class="modal-overlay">
+        <div class="modal-card" style="width: 300px;">
+            <div class="modal-header">
+                <div class="modal-title">Select Timeframe</div>
+                <div class="modal-close" onclick="closeTimeframesModal()">&#10005;</div>
+            </div>
+            <div class="tf-grid" id="timeframesModalContent"></div>
+        </div>
+    </div>
+    <div id="indicatorsModal" class="modal-overlay">
+        <div class="modal-card" style="width: 420px;">
+            <div class="modal-header">
+                <div class="modal-title">Indicators</div>
+                <div class="modal-close" onclick="closeModal('indicatorsModal')">&#10005;</div>
+            </div>
+            <div class="modal-content"><div class="ind-grid" id="indicatorsList"></div></div>
+        </div>
+    </div>
+    <div id="indSettingsModal" class="modal-overlay">
+        <div class="modal-card" style="width: 320px;">
+            <div class="modal-header">
+                <div class="modal-title" id="indSettingsTitle">Settings</div>
+                <div class="modal-close" onclick="closeModal('indSettingsModal')">&#10005;</div>
+            </div>
+            <div class="modal-content" id="indSettingsContent"></div>
+        </div>
+    </div>
+
+    <!-- 🔹 Settings Panel — Technical Redesign -->
+    <div id="settings-panel">
+        <div class="sp-header">
+            <span class="sp-title">⚙️ Chart Configuration</span>
+            <span class="sp-close" onclick="closeSettings()">&#10005;</span>
+        </div>
+        
+        <div class="sp-grid">
+            <!-- Section 1: Candle Colors -->
+            <div class="sp-section">
+                <div class="sp-label">🕯️ Candle Colors</div>
+                <div class="sp-row">
+                    <label>Bull Body</label>
+                    <input type="color" id="sp-upColor" value="#00C510">
+                </div>
+                <div class="sp-row">
+                    <label>Bull Border</label>
+                    <input type="color" id="sp-borderUpColor" value="#00C510">
+                </div>
+                <div class="sp-row">
+                    <label>Bull Wick</label>
+                    <input type="color" id="sp-wickUpColor" value="#00C510">
+                </div>
+                <div class="divider"></div>
+                <div class="sp-row">
+                    <label>Bear Body</label>
+                    <input type="color" id="sp-downColor" value="#FF0000">
+                </div>
+                <div class="sp-row">
+                    <label>Bear Border</label>
+                    <input type="color" id="sp-borderDownColor" value="#FF0000">
+                </div>
+                <div class="sp-row">
+                    <label>Bear Wick</label>
+                    <input type="color" id="sp-wickDownColor" value="#FF0000">
+                </div>
+            </div>
+
+            <!-- Section 2: Chart Interface -->
+            <div class="sp-section">
+                <div class="sp-label">🖥️ Chart Interface</div>
+                <div class="sp-row">
+                    <label>Background</label>
+                    <input type="color" id="sp-bgColor" value="#0a0f1c">
+                </div>
+                <div class="sp-row">
+                    <label>Text Color</label>
+                    <input type="color" id="sp-textColor" value="#bfdbfe">
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="sp-row">
+                    <label>Grid Lines</label>
+                    <input type="checkbox" id="sp-gridVisible" checked>
+                </div>
+                <div class="sp-row">
+                    <label>Grid Color</label>
+                    <input type="color" id="sp-gridColor" value="#1e3a8a">
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="sp-row">
+                    <label>Price Line</label>
+                    <input type="checkbox" id="sp-priceLineVisible">
+                </div>
+            </div>
+        </div>
+
+        <div class="sp-actions">
+            <button class="sp-btn apply" onclick="applySettings()">Save Changes</button>
+            <button class="sp-btn cancel" onclick="closeSettings()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- 🔹 Editor Panel -->
+    <div id="editorPanel">
+        <div class="resize-handle" id="resizeHandle"></div>
+        <div class="resize-line"></div>
+        <div class="editor-size-hint" id="sizeHint"></div>
+        <div id="tabBar" class="tab-bar"></div>
+        <div class="editor-toolbar">
+            <button class="btn-newfile" id="newFileBtn2">+ New</button>
+            <div class="editor-title">✦ EDITOR</div>
+            <select id="templateSelect" class="editor-select" onchange="loadTemplate()">
+                <option value="ma">MA</option>
+                <option value="ema">EMA</option>
+                <option value="bb">Bollinger</option>
+                <option value="vwap">VWAP</option>
+                <option value="pivot">Pivot</option>
+                <option value="arrows">Arrows</option>
+                <option value="area">Area</option>
+                <option value="custom" selected>Blank</option>
+            </select>
+            <input type="text" id="indicatorName" class="editor-input" value="MyIndicator" placeholder="Name">
+            <button class="btn-run" id="btnRun" onclick="runIndicator()">&#9654; Run</button>
+            <button class="btn-stop" id="btnStop" onclick="stopIndicator()">&#9632; Stop</button>
+            <button class="btn-clear" onclick="clearAll()">&#10005; Clear</button>
+            <button class="btn-export" onclick="exportCSV()">CSV</button>
+            <div class="editor-close" id="editorCloseBtn">&#10005;</div>
+        </div>
+        <div class="editor-body">
+            <div id="monacoEditorContainer"></div>
+            <div id="errorCard">
+                <div class="error-card-inner">
+                    <div class="error-card-head">
+                        <div class="error-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+                        <span class="error-card-type" id="errorType">Runtime Error</span>
+                        <span class="error-card-line-badge" id="errorLineBadge" title="Click to jump to line">Line --</span>
+                        <span class="error-card-x" id="errorCardClose" title="Close">&#10005;</span>
+                    </div>
+                    <div class="error-card-msg" id="errorMsg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="editor-status"><div id="editorStatus">Ready</div><div id="editorInfo">JavaScript</div></div>
+    </div>
+
+    <!-- 🔹 App Container -->
+    <div id="appContainer">
+        <div id="chartContainer">
+            <div id="mainChartWrap"></div>
+            <div id="indicatorArea"></div>
+        </div>
+    </div>
+    <div id="toastContainer"></div>
+
+    <!-- 🔹 External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    
+    <!-- 🔹 Project Scripts (Order Matters!) -->
+    <script src="datafeed.js"></script>
+    <script src="chart.js"></script>
+    <script src="indicators.js"></script>
+    <script src="editor.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

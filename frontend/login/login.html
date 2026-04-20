@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login — QuotexChart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔹 Favicon & App Icons -->
+    <link rel="icon" type="image/png" href="../assets/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icon.png">
+    <meta name="apple-mobile-web-app-title" content="Quotex Pro Trader">
+    <meta name="theme-color" content="#050814">
+    
+    <script src="/eel.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
+    <base target="_blank">
+</head>
+<body>
+    <div class="ornate-container">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        
+        <div class="card">
+            <div class="glow glow-1"></div>
+            <div class="glow glow-2"></div>
+            <h2>QuotexChart</h2>
+            <div class="subtitle">~ Veritas et Tempus ~</div>
+            
+            <div class="inp-group">
+                <input type="email" id="email" class="inp" placeholder="Email" required autocomplete="email">
+            </div>
+            <div class="inp-group password-wrapper">
+                <input type="password" id="password" class="inp" placeholder="Password" required autocomplete="current-password">
+                <span class="toggle-pass" onclick="togglePassword()">
+                    <svg id="eyeOpen" viewBox="0 0 24 24">
+                        <path d="M12 5C7 5 3.1 8 1.5 12c1.6 4 5.5 7 10.5 7s8.9-3 10.5-7C20.9 8 17 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                    </svg>
+                    <svg id="eyeClosed" viewBox="0 0 24 24" style="display:none">
+                        <path d="M2 5.3 3.3 4l17 17-1.3 1.3-3.1-3.1C14.7 19.7 13.4 20 12 20 7 20 3.1 17 1.5 13c.7-1.7 1.8-3.2 3.2-4.4L2 5.3z"/>
+                    </svg>
+                </span>
+            </div>
+            
+            <button class="btn" onclick="login()">Enter</button>
+            <div class="spinner" id="spinner"></div>
+            <div class="error" id="error"></div>
+            <div class="footer-ornament"><span>✦</span> ☙ <span>✦</span></div>
+        </div>
+    </div>
+    
+    <div class="footer">Designed & Developed by <b>BADI SALAH</b> © 2026</div>
+    <script src="login.js"></script>
+</body>
+</html>
